@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  <style>
+    body {
+  font-family:'Inter',  sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: white; /* Purple color */
+  padding:10px 0;
+  
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid white; /* Darker purple border */
+  
+  box-shadow: 0 -12px 10px 2px rgba(0,0,0,0.1);
+}
+
+.nav-item {
+  text-align: center;
+  flex: 1;
+  
+  border-radius: 7.5px;
+  color: #388c82;
+  font-size: 12px;
+  text-decoration: none;
+  
+  width: 50px;
+  height: 50px;
+  padding-left: 5px;
+  padding-right: 10px;
+  transition-duration: 0.2s;
+} .nav-item:hover{
+  background: #388c82;
+  color: white;
+  
+}
+.nav-item img:hover{
+    
+  filter: brightness(0) saturate(100%) invert(100%) sepia(5%) saturate(0%) hue-rotate(294deg) brightness(104%) contrast(101%);
+}
+.nav-item span {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  
+}
+
+.icon img {
+  width: 25px;
+  height: 25px;
+  padding-top: 1px;
+}
+
+  </style>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav data-set="bottom-Nav" id="Nav-All">
+    <div class="bottom-nav">
+  <div  class="nav-item">
+    <div class="icon">
+      <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@main/house-chimney (1).png
+" >
+    </div>
+    <span>Home</span>
+  </div>
+  <div  class="nav-item">
+    <div class="icon">
+      <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@main/gift (1).png
+" >
+    </div>
+    <span>Giveaway<span>
+  </div>
+  <div  class="nav-item">
+    <div class="icon">
+      <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@main/box-dollar%20(1).png
+" >
+    </div>
+    <span>Withdraw</span>
+  </div>
+  <div  class="nav-item">
+    <div class="icon">
+      <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@main/circle-user (1).png
+">
+    </div>
+    <span>me</span>
+  </div>
+</div>
+
+  </nav>
+  <script src="main.js"></script>
+</body>
+</html>

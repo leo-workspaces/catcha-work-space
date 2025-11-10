@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redeem Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background-color: #00aaff;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-bar img {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+
+    .country {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Grid of Rewards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .reward {
+      background-color: ;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);background:#1abc9c;
+      color: white;
+    }
+
+    .reward img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+      
+    }
+
+    /* Bottom Navigation */
+   
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+
+  <script type="module">
+  
+    const butter = document.createElement('div')
+    butter.id = "app"
+    document.body.prepend(butter)
+   async function nav(){
+const navs = await   import ("/app.js")
+  navs.navbarUi(document.getElementById('app'))}
+  nav()
+  </script>
+
+<!-- choosing part -->
+  <div id="choosePayoutOp" style="text-align: center;width:200px; height:40px; border:0px solid black; justify-content: center;justify-items: center;align-items: center; align-content: center;position: relative;margin-left: 90px;"><select style="width:100%;height:100%; text-align:center;font-size:18px;color:#ffffff;opacity:0.8;border:none;background: #1ABC9C;margin-top:10px;outline:none;border-radius:4.0px;"><option value="QuickP">Quick Payout</option>
+  <option>Monthly Payout</option></select></div>
+  <!-- Rewards Grid -->
+  <div class="grid">
+    <div class="reward"><img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@Bank@1.1/Telebirr.png" style="width: 60px; height:30px;"><div>Telebirr</div></div>
+    <div class="reward"><img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@Bank@1.1/v8fmg4Cd_eU_aMo6I8ZWa86HXR7mj98fXQVHXO_cWb8-icon.webp" ><div>CBE bank</div></div>
+    <div class="reward"><img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@Bank@1.1/1726053803635-abyssinia.png" ><div>Abysinnia</div></div>
+    <div class="reward"><img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@Bank@1.1/Screenshot_20251104_110326_Google.jpg" ><div>Ebirr</div></div>
+    <div class="reward"><img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@Bank@1.1/mpesa-518x500.png"><div>Mpesa</div></div>
+    <div class="reward"><img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@Bank@1.1/Dashen_Bank.png" ><div>Dashen Bank</div></div>
+   
+  </div>
+
+
+
+</body>
+</html>
