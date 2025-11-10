@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/style.css" rel="stylesheet">
   <title>Redeem Page</title>
   <style>
     body {
@@ -38,6 +39,7 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 15px;
       padding: 20px;
+    margin-top:20px;
     }
 
     .reward {
@@ -45,8 +47,8 @@
       border-radius: 10px;
       padding: 20px;
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);background:#1abc9c;
-      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);color:#1abc9c;
+      background: white;
     }
 
     .reward img {
@@ -71,7 +73,12 @@
     document.body.prepend(butter)
    async function nav(){
 const navs = await   import ("/app.js")
-  navs.navbarUi(document.getElementById('app'))}
+  navs.navbarUi(document.getElementById('app'))
+     
+     const nav = await import("/app.js")
+nav.botomNav(document.getElementById ('app'))
+}
+   
   nav()
   </script>
 
