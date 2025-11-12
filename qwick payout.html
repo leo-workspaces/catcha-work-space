@@ -99,4 +99,21 @@ nav.botomNav(document.getElementById ('app'))
 
 
 </body>
+ <script type="module">
+  
+    const butter = document.createElement('div')
+    butter.id = "app"
+    document.body.prepend(butter)
+   async function nav(){
+const navs = await   import ("/app.js")
+  navs.navbarUi(document.getElementById('app'))
+     
+     const nav = await import("/app.js")
+nav.botomNav(document.getElementById ('app'))
+}
+   
+  nav()
+  </script>
+  <
+  
 </html>
