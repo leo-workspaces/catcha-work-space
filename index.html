@@ -81,7 +81,7 @@
 
   <!-- Signup Form -->
   <div style="margin-top: 30px; color:white;">
-    <div style="border:1px solid ; padding:20px  0 20px 0 ;  background: rgba(26,188,156,0.1);border-radius:8px;" onsubmit="signup()">
+    <div style="border:1px solid ; padding:20px  0 20px 0 ;  background: rgba(26,188,156,0.1);border-radius:8px;" >
     <p style="font-size: 20px;">Sign up and earn <strong>free money</strong><img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@main/poly-dollars.png" width="50px" height="50px" style="position: absolute; margin-top:-15px;"></p>
      <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@V.1.2/envelope.png" style="width:22.5px;height:22.5px;border:0px solid black; position: absolute; margin-top:7px; margin-left: 5px;" />
     <input type="email" placeholder="Enter your email" style="padding: 5px 10px 5px 40px;height: 28px; width: 270px; border: 1px solid #ccc; border-radius: 4px; outline:none; outline-color: black;"
@@ -93,7 +93,7 @@
       <input type="password" placeholder="Enter your Password" style=" width: 270px;height:28px; border: 1px solid #ccc; border-radius:4px; padding: 5px 10px 5px 40px; outline:none;" onfocus="this.style.background='#ddd';"
     onblur="this.style.background='#ffffff';" id="password">
       <br><br>
-    <button style="padding: 10px 20px; background-color: #27ae60; color: white; border: none; border-radius: 4px; width: 150px;border:4px solid #27ae60;" type="input" onsubmit="signup()">
+    <button style="padding: 10px 20px; background-color: #27ae60; color: white; border: none; border-radius: 4px; width: 150px;border:4px solid #27ae60;" type="button" onsubmit="signup()">
       Sign up 
     </button>
     <br><br>
@@ -159,7 +159,7 @@
 <script type="module">
 await import {supabase} from "https://cdn.jsdelivr.net/gh/fieme-one/Server@main/supabaseJS.js"
 async function signup(event){
-   event.preventDefault();
+   
    var email = document.getElementById('email').value.trim()
    var password = document.getElementById('password').value.trim()
    const {data,error} = await supabase.auth.signUp({
@@ -172,6 +172,6 @@ async function signup(event){
      alert("try again ")
    }
  }
- signup()
+ 
 </script>
 </html>
