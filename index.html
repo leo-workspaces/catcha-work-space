@@ -24,7 +24,7 @@
  <body style="font-family: Arial, sans-serif; background-color: #ffffff; margin:0;">
    <!-- rn header-->
 <div style="display:flex; border:0px solid black; width: 100%; position:fixed; z-index: 100; top:0; box-shadow: 0 1px 10px -3px black;background: white; ">
-   <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@main/Copilot_20251101_191415.ico" style="width: 40px; height: 40px ; margin: 12.5px auto 20px 6px; position: fixed;">
+   <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@main/Copilot_20251101_191415.ico" style="width: 40px; height: 40px ; margin: 12.5px auto 20px 6px; position: fixed; " alt="logo">
     <h3 style="margin: 20px auto 20px  45px; color:#1ABC9C; "> CatchaPay</h3>
     <div style="margin-top: 10px;">
   
@@ -81,19 +81,19 @@
 
   <!-- Signup Form -->
   <div style="margin-top: 30px; color:white;">
-    <form style="border:1px solid ; padding:20px  0 20px 0 ;  background: rgba(26,188,156,0.1);border-radius:8px;">
+    <form style="border:1px solid ; padding:20px  0 20px 0 ;  background: rgba(26,188,156,0.1);border-radius:8px;" onsubmit="signup()">
     <p style="font-size: 20px;">Sign up and earn <strong>free money</strong><img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@main/poly-dollars.png" width="50px" height="50px" style="position: absolute; margin-top:-15px;"></p>
      <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@V.1.2/envelope.png" style="width:22.5px;height:22.5px;border:0px solid black; position: absolute; margin-top:7px; margin-left: 5px;" />
     <input type="email" placeholder="Enter your email" style="padding: 5px 10px 5px 40px;height: 28px; width: 270px; border: 1px solid #ccc; border-radius: 4px; outline:none; outline-color: black;"
     onfocus="this.style.background='#ddd';"
-    onblur="this.style.background='#ffffff';">
+    onblur="this.style.background='#ffffff';" id="email">
     <br><br>
     <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@V.1.2/eye.png" style="width:25px;height:25px;border:0px solid black; position: absolute; margin-top:5px; margin-left: px; right:35px;" />
      <img src="https://cdn.jsdelivr.net/gh/fieme-one/Quick-web-imd-data@V.1.2/lock.png" style="width:22.5px;height:22.5px;border:0px solid black; position: absolute; margin-top:5px; margin-left: 5px;" />
       <input type="password" placeholder="Enter your Password" style=" width: 270px;height:28px; border: 1px solid #ccc; border-radius:4px; padding: 5px 10px 5px 40px; outline:none;" onfocus="this.style.background='#ddd';"
-    onblur="this.style.background='#ffffff';">
+    onblur="this.style.background='#ffffff';" id="password">
       <br><br>
-    <button style="padding: 10px 20px; background-color: #27ae60; color: white; border: none; border-radius: 4px; width: 150px;border:4px solid #27ae60;">
+    <button style="padding: 10px 20px; background-color: #27ae60; color: white; border: none; border-radius: 4px; width: 150px;border:4px solid #27ae60;" type="input">
       Sign up 
     </button>
     <br><br>
@@ -149,12 +149,29 @@
       
     </section>
   </div>
-  <footer style="display:grid;grid-row-gap: 1rem;justify-content:center;align-content: center; background: #1ABC9C; padding:20px;text-align: center;color:white;">
-    <span>&copy;CatchaPay</span>
-    <span>term</span>
+  <footer style="display:grid;grid-row-gap: 1rem;justify-content:center;align-content: center; background: #1ABC9C; padding:30px;text-align: center;color:white;">
+    <span><span style="font-size: 10px;margin-top: -2.5px;margin-left:-10px;position: absolute;">&copy;</span>CatchaPay</span>
+    <span>terms</span>
     <span>privacy</span>
     <img src="#"  style="height:10rem;width:20rem;"/>
   </footer>
 </body>
-
+<script type="module">
+await import {supabase} from "https://cdn.jsdelivr.net/gh/fieme-one/Server@main/supabaseJS.js"
+async function signup(event){
+   event.preventDefault();
+   var email = document.getElementById('email').value.trim()
+   var password = document.getElementById('password').value.trim()
+   const {data,error} = await supabase.auth.signUp({
+     email:email,
+     password:password
+   })  if(data){
+     alert("your acount is created successfully ")
+   }
+   else{
+     alert("try again ")
+   }
+ }
+ signup()
+</script>
 </html>
