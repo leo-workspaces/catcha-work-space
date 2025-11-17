@@ -159,43 +159,50 @@
     <img src="#"  style="height:10rem;width:20rem;"/>
   </footer>
 </body>
+<!-- Include Supabase JS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
-<script type="module">
-const supabaseUrl = "https://jtimdeudmkeffendjczz.supabase.co"
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0aW1kZXVkbWtlZmZlbmRqY3p6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMTYxNzQsImV4cCI6MjA3ODg5MjE3NH0.6cqsAzO8DvnjIvg4Urb6Ld1W2xe3FBI8s2yvFMdwox8"
-const supabase = createClient(supabaseUrl,supabaseKey);
-var signup = document.getElementById('signUp')
-signup.addEventListener('click', async () => {
-    document.getElementById('rotate').style.display = "block"
-    document.getElementById('rotate').style.zIndex="100"
-    var email = document.getElementById('email').value.trim()
-    var password = document.getElementById('password').value.trim()
+
+<script>
+  // Initialize Supabase
+  const supabaseUrl = "YOUR_SUPABASE_URL";
+  const supabaseKey = "YOUR_SUPABASE_ANON_KEY";
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  var signup = document.getElementById('signUp');
+  signup.addEventListener('click', async () => {
+    document.getElementById('rotate').style.display = "block";
+
+    var email = document.getElementById('email').value.trim();
+    var password = document.getElementById('password').value.trim();
 
     try {
-        const { data, error } = await supabase.auth.signUp({ email, password })
+      // Sign up the user
+      const { data, error } = await supabase.auth.signUp({ email, password });
 
-        if (error) {
-            alert("Try again",error.message)
-            console.error(error.message)
-            document.getElementById('rotate').style.borderTopColor = "red"
-            return
-        }
+      if (error) {
+        alert("Signup failed. Try again.");
+        document.getElementById('rotate').style.borderTopColor = "red";
+        return;
+      }
 
-        var name = email.split("@")[0];
-        const { data: tableData, error: err } = await supabase.rpc("insert_profile_for_user", { p_email: email, p_name: name })
+      // Extract name from email
+      var name = email.split("@")[0];
 
-        if (err) {
-            alert("Please try again",err.message)
-        } else {
-            document.getElementById('rotate').style.display = "none"
-            alert("Hey, it's working")
-        }
+      // Call your RPC function
+      const { data: tableData, error: err } = await supabase.rpc("insert_profile_for_user", { p_email: email, p_name: name });
+
+      if (err) {
+        alert("Failed to insert profile. Try again.");
+      } else {
+        document.getElementById('rotate').style.display = "none";
+        alert("Signup successful!");
+      }
 
     } catch (e) {
-        console.error(e)
-        alert("Unexpected error occurred")
-        document.getElementById('rotate').style.display = "none"
+      console.error(e);
+      alert("Unexpected error occurred.");
+      document.getElementById('rotate').style.display = "none";
     }
-})
+  });
 </script>
 </html>
