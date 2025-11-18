@@ -323,6 +323,7 @@ export async function login() {
 
       if ( confirm !== password) {
        alert("please make the password")
+        document.getElementById('LoaderIndicator').style.display="none"
         return;
       }
 
@@ -373,6 +374,7 @@ export async function login() {
         
         if(!password || !email){
           alert("please fill your email or password")
+          document.getElementById('LoaderIndicator').style.display="none"
           return;
         }
         
