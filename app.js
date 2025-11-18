@@ -264,9 +264,9 @@ export async function login() {
     <div style="max-width:300px;padding:20px;background:white;border-radius:15px;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-family:sans-serif;">
       <div id="cancelerLogin">&times;</div>
       <h2>Log in to CatchaPay</h2>
-      <input id="email" type="email" placeholder="Enter Email" style="width:95%;padding:10px;margin-bottom:15px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
-      <input id="password" type="password" placeholder="Enter Password" style="width:95%;padding:10px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
-      <button style="width:100%;background-color:#1ABC9C;color:white;padding:10px;border:none;border-radius:20px;font-size:16px;margin-top:15px;">Log in</button>
+      <input id="emailBox" type="email" placeholder="Enter Email" style="width:95%;padding:10px;margin-bottom:15px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
+      <input id="passwordBox" type="password" placeholder="Enter Password" style="width:95%;padding:10px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
+      <button style="width:100%;background-color:#1ABC9C;color:white;padding:10px;border:none;border-radius:20px;font-size:16px;margin-top:15px;" id="loginBox">Log in</button>
       <div style="text-align:center;margin-top:20px;">
         <span>Don't have an account?</span>
         <button style="background-color:#1ABC9C;color:white;border:none;padding:6px 12px;border-radius:6px;font-size:14px;margin-left:5px;" id="signChange">Sign up</button>
@@ -282,8 +282,8 @@ export async function login() {
       <div style="max-width:300px;padding:20px;background:white;border-radius:15px;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-family:sans-serif;" id="signup">
         <div id="cancelerLogin">&times;</div>
         <h2>Sign up to CatchaPay</h2>
-        <input id="email" type="email" placeholder="Enter Email" style="width:95%;padding:10px;margin-bottom:15px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
-        <input id="password" type="password" placeholder="Enter Password" style="width:95%;padding:10px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
+        <input id="emails" type="email" placeholder="Enter Email" style="width:95%;padding:10px;margin-bottom:15px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
+        <input id="passwordlss" type="password" placeholder="Enter Password" style="width:95%;padding:10px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
         <input id="ConfirmPass" type="password" placeholder="Confirm Password" style="width:95%;padding:10px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;margin-top:10px;">
         <button id="signupO" style="width:100%;background-color:#1ABC9C;color:white;padding:10px;border:none;border-radius:20px;font-size:16px;margin-top:15px;">Sign up</button>
         <div style="text-align:center;margin-top:20px;">
@@ -317,12 +317,12 @@ export async function login() {
     if (t.id === "signupO") {
       document.getElementById("LoaderIndicator").style.display = "block";
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+      const email = document.getElementById("emails").value.trim();
+      const password = document.getElementById("passwordlss").value.trim();
       const confirm = document.getElementById("ConfirmPass").value.trim();
 
-      if (password === confirm) {
-       
+      if ( confirm !== password) {
+       alert("please make the password")
         return;
       }
 
@@ -352,6 +352,8 @@ export async function login() {
         } else {
           alert("Signed up successfully!");
         }
+        
+      
 
       } catch (e) {
         console.error(e);
@@ -359,6 +361,43 @@ export async function login() {
       }
 
       document.getElementById("LoaderIndicator").style.display = "none";
+      
+      
+     
     }
+    //login
+     if(t.id === "loginBox"){
+        document.getElementById('LoaderIndicator').style.display="block"
+        const email = document.getElementById('emailBox').value.trim()
+        const password = document.getElementById('passwordBox').value.trim()
+        
+        if(!password || !email){
+          alert("please fill your email or password")
+          return;
+        }
+        
+        const {data, error} = await supabase.auth.signInWithPassword({email,password})
+       
+       if(error){
+      var load  = document.getElementById('LoaderIndicator')
+      load.innerHTML = "wrong password or email"
+      load.style.color="red"
+      load.style.width ="auto"
+      load.style.padding ="10px"
+      setTimeout(() =>{
+        load.innerHTML = `<div></div>`
+        load.style.width="100px"
+        load.style.padding ="0"
+        load.style.display = "none"
+      },1000)
+       } 
+       
+        else{ alert("login successfully")
+          document.getElementById('LoaderIndicator').style.display="none"
+          console.log(data.user.id)
+        }
+        
+        
+      }
   });
 }
