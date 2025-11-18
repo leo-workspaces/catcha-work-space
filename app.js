@@ -244,94 +244,121 @@ export async function botomNav(app){
 
  
 }
+import { supabase } from "https://cdn.jsdelivr.net/gh/fieme-one/Server@main/supabaseJS.js";
 
-export async function login(){
-  var loginUi = document.getElementById('loginUi')
-  if(!loginUi){
-    loginUi = document.createElement('div')
-    loginUi.id = "loginUi"
-    loginUi.style=`
-      position: fixed; top: 0; left: 0;width: 100%; height: 100%;
-      background-color: rgba(26, 188, 156, 0.4); /* semi-transparent */
+export async function login() {
+  var loginUi = document.getElementById("loginUi");
+  if (!loginUi) {
+    loginUi = document.createElement("div");
+    loginUi.id = "loginUi";
+    loginUi.style = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(26,188,156,0.4);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; z-index:10000;
-    `
+      display: flex; justify-content: center; align-items: center; z-index:10000;
+    `;
+    document.body.appendChild(loginUi);
   }
-  document.body.appendChild(loginUi)
-  
-  const orignialLogin = `<div style="
-      max-width: 300px;  padding: 20px;  background: white; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: sans-serif;
-    ">
-    <div id="cancelerLogin">&times;</div>
-      <h2 style="text-align: left; margin-bottom: 20px;">Log in to CatchaPay</h2>
-      <input type="email" placeholder="Enter Email" style="width: 95%; padding: 10px; margin-bottom: 15px; border: 1.5px solid #ccc; border-radius: 20px; font-size: 16px;outline:none;">
-      <input type="password" placeholder="Enter Password" style="width: 95%; padding:10px; border: 1.5px solid #ccc; border-radius: 20px; font-size: 16px;outline:none;">
-      <button style="width: 100%; background-color: #1ABC9C; color: white; padding: 10px; border: none; border-radius: 20px; font-size: 16px; margin-top: 15px;">
-        Log in
-      </button>
-      <br><span style="margin-left:145px; top: 15px; position: relative;">or</span></br>
-      <button style="width: 100%; background-color: white; color: #333; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; margin-top: 30px;">
-        <img src="google-logo.png" style="height: 18px; vertical-align: middle; margin-right: 8px;"> Log in with Google
-      </button>
-      <div style="text-align: center; margin-top: 20px;">
+
+  const originalLogin = `
+    <div style="max-width:300px;padding:20px;background:white;border-radius:15px;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-family:sans-serif;">
+      <div id="cancelerLogin">&times;</div>
+      <h2>Log in to CatchaPay</h2>
+      <input id="email" type="email" placeholder="Enter Email" style="width:95%;padding:10px;margin-bottom:15px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
+      <input id="password" type="password" placeholder="Enter Password" style="width:95%;padding:10px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
+      <button style="width:100%;background-color:#1ABC9C;color:white;padding:10px;border:none;border-radius:20px;font-size:16px;margin-top:15px;">Log in</button>
+      <div style="text-align:center;margin-top:20px;">
         <span>Don't have an account?</span>
-        <button style="background-color: #1ABC9C; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 14px; margin-left: 5px;" id="signChange">
-          Sign up
-        </button>
+        <button style="background-color:#1ABC9C;color:white;border:none;padding:6px 12px;border-radius:6px;font-size:14px;margin-left:5px;" id="signChange">Sign up</button>
       </div>
-    </div>`
-   
-  loginUi.innerHTML = orignialLogin
+    </div>
+  `;
   
-  // Use event delegation instead of direct element references
-  loginUi.addEventListener('click', function(event) {
-    const target = event.target;
-    
-    // Handle cancel button
-    if (target.id === 'cancelerLogin') {
-      if (document.body.contains(loginUi)) {
-        document.body.removeChild(loginUi);
-      }
+  loginUi.innerHTML = originalLogin;
+
+  // signup UI switch
+  function signupUI() {
+    loginUi.innerHTML = `
+      <div style="max-width:300px;padding:20px;background:white;border-radius:15px;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-family:sans-serif;" id="signup">
+        <div id="cancelerLogin">&times;</div>
+        <h2>Sign up to CatchaPay</h2>
+        <input id="email" type="email" placeholder="Enter Email" style="width:95%;padding:10px;margin-bottom:15px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
+        <input id="password" type="password" placeholder="Enter Password" style="width:95%;padding:10px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;">
+        <input id="ConfirmPass" type="password" placeholder="Confirm Password" style="width:95%;padding:10px;border:1.5px solid #ccc;border-radius:20px;font-size:16px;outline:none;margin-top:10px;">
+        <button id="signupO" style="width:100%;background-color:#1ABC9C;color:white;padding:10px;border:none;border-radius:20px;font-size:16px;margin-top:15px;">Sign up</button>
+        <div style="text-align:center;margin-top:20px;">
+          <span>Already have an account?</span>
+          <button id="loginChange" style="background-color:#1ABC9C;color:white;border:none;padding:6px 12px;border-radius:6px;font-size:14px;margin-left:5px;">Login</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Handle clicks
+  loginUi.addEventListener("click", async (event) => {
+    const t = event.target;
+
+    if (t.id === "cancelerLogin") {
+      loginUi.remove();
       return;
     }
-    
-    // Handle sign up button click
-    if (target.id === 'signChange') {
+
+    if (t.id === "signChange") {
       signupUI();
       return;
     }
-    
-    // Handle login button click (when in signup mode)
-    if (target.id === 'loginChange') {
-      loginUi.innerHTML = orignialLogin;
+
+    if (t.id === "loginChange") {
+      loginUi.innerHTML = originalLogin;
       return;
     }
-  });
-  
-  function signupUI(){
-    loginUi.innerHTML = `<div style="
-      max-width: 300px;  padding: 20px;  background: white; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: sans-serif;
-    " id="signup">
-    <div id="cancelerLogin">&times;</div>
-      <h2 style="text-align: left; margin-bottom: 20px;">Sign up to CatchaPay</h2>
-      <input type="email" placeholder="Enter Email" style="width: 95%; padding: 10px; margin-bottom: 15px; border: 1.5px solid #ccc; border-radius: 20px; font-size: 16px;outline:none;">
-      <input type="password" placeholder="Enter Password" style="width: 95%; padding:10px; border: 1.5px solid #ccc; border-radius: 20px; font-size: 16px;outline:none;">
-      <input type="password" placeholder="confirm password" style="width: 95%; padding:10px; border: 1.5px solid #ccc; border-radius: 20px; font-size: 16px;outline:none; margin-top:10px;">
-      <button style="width: 100%; background-color: #1ABC9C; color: white; padding: 10px; border: none; border-radius: 20px; font-size: 16px; margin-top: 15px;" id="signupO">
-        Sign up
-      </button>
-      <br><span style="margin-left:145px; top: 15px; position: relative;">or</span></br>
-      <button style="width: 100%; background-color: white; color: #333; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; margin-top: 30px;">
-        <img src="google-logo.png" style="height: 18px; vertical-align: middle; margin-right: 8px;"> Log in with Google
-      </button>
-      <div style="text-align: center; margin-top: 20px;">
-        <span>already have an account?</span>
-        <button style="background-color: #1ABC9C; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 14px; margin-left: 5px;" id="loginChange">
-          Login
-        </button>
-      </div>
-    </div>`;
-  }
-   
-}
 
+    // SIGNUP BUTTON
+    if (t.id === "signupO") {
+      document.getElementById("LoaderIndicator").style.display = "block";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const confirm = document.getElementById("ConfirmPass").value.trim();
+
+      if (password === confirm) {
+       
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase.auth.signUp({ email, password });
+
+        if (error) {
+          alert("Failed to signup: " + error.message);
+          document.getElementById("LoaderIndicator").style.display = "none";
+          return;
+        }
+
+        const userId = data.user.id;
+        const name = email.split("@")[0];
+
+        const { data: tableData, error: err } = await supabase.rpc(
+          "insert_profile_for_user",
+          {
+            p_user_id: userId,
+            p_email: email,
+            p_name: name
+          }
+        );
+
+        if (err) {
+          alert("Failed to insert Data: " + err.message);
+        } else {
+          alert("Signed up successfully!");
+        }
+
+      } catch (e) {
+        console.error(e);
+        alert("Unexpected error occurred!");
+      }
+
+      document.getElementById("LoaderIndicator").style.display = "none";
+    }
+  });
+}
