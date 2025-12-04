@@ -78,3 +78,17 @@ height: 50px;
    50%  {transform: rotate(180deg);}
     100%  {transform: rotate(360deg);}
 }
+#signChange:active{
+  background: white;
+  transition-duration: 0.1s;
+}
+  .g_id_signin {
+  width: 260px !important;
+
+
+  margin-left: 50px !important;
+}
+ @keyframes slow{
+    from{top: 0;}
+    to{top: 30px;}
+ }
