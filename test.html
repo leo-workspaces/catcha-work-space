@@ -5,8 +5,12 @@
   <title>Supabase Test</title>
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.36.0/dist/supabase.min.js"></script>
-  <script>
+
+
+<script>
+    fetch("https://jtimdeudmkeffendjczz.supabase.co/rest/v1/")
+  .then(r => console.log("OK:", r.status))
+  .catch(e => console.error("FAIL:", e));
     // Access the Supabase client via the global variable
     const supabaseUrl = "https://jtimdeudmkeffendjczz.supabase.co";
     const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0aW1kZXVkbWtlZmZlbmRqY3p6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMTYxNzQsImV4cCI6MjA3ODg5MjE3NH0.6cqsAzO8DvnjIvg4Urb6Ld1W2xe3FBI8s2yvFMdwox8";
@@ -22,6 +26,9 @@
     }
 //hey
     testAuth();
+</script>
+<script>
+
   </script>
 </body>
 </html>
