@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Supabase Test</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.36.0/dist/supabase.min.js"></script>
+  <script>
+    // Access the Supabase client via the global variable
+    const supabaseUrl = "https://jtimdeudmkeffendjczz.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0aW1kZXVkbWtlZmZlbmRqY3p6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMTYxNzQsImV4cCI6MjA3ODg5MjE3NH0.6cqsAzO8DvnjIvg4Urb6Ld1W2xe3FBI8s2yvFMdwox8";
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function testAuth() {
+      const { data, error } = await supabase.auth.getSession();
+      console.log("Session data:", data, "Error:", error);
+      if(data){
+        alert("this thing working on here ")
+      }
+      else{alert("not wokring couse there is no use just checking ")}
+    }
+
+    testAuth();
+  </script>
+</body>
+</html>
