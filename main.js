@@ -1,4 +1,4 @@
-
+//hey is this get updated
 export async function botomNav(app){
  var bnav = document.getElementById('BottomNav')
  if(!bnav){
