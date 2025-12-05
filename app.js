@@ -1,12 +1,18 @@
 import { supabase } from "https://cdn.jsdelivr.net/gh/fieme-one/Server@main/supabaseJS.js";
 const {data,error} = await supabase.rpc('get_user_profile')
 var dataO = null
-if(data && data.length > 0){
-  dataO = data[0]
-  
-}
-else if(error){
-  alert(`couldn't get user ${error.message}`)
+const currentPage = window.location.pathname;
+
+// Stop redirect logic on index.html
+if (currentPage === "/" || currentPage.endsWith("index.html")) {
+    console.log("Index page – skip data redirect check");
+} else {
+    // Safe to check data
+    if (!data || data.length === 0) {
+        window.location.href = "/index.html";
+    } else {
+        dataO = data[0];
+    }
 }
 if(dataO !== null && window.location.href.includes("index.html")){
   window.location.href = "./home.html"
@@ -575,6 +581,7 @@ const { data, error } = await supabase.auth.signInWithPassword({
   alert("Login successfully");
   popLogin.stopAllPop();
   console.log(data.user.id);
+  window.location.href ="/home.html"
 }
   });
 }
