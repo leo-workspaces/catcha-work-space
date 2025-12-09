@@ -1,4 +1,4 @@
-import { supabase } from "https://cdn.jsdelivr.net/gh/fieme-one/Server@main/supabaseJS.js";
+import { supabase } from "/supabaseJS (1).js";
 const {data,error} = await supabase.rpc('get_user_profile')
 var dataO = null
 const currentPage = window.location.pathname;
@@ -654,7 +654,7 @@ color:#1abc9c;background-color: #e0f7f5; font-weight: bold;"data-ammount="25000"
     <p style="text-align: center; font-size: 14px; color: #555;">Your payment will be sent to your account number details.</p>
 
 
-    <button style="width: 100%; background-color: #1abc9c; color: white; padding: 12px; border: none; border-radius: 8px; font-size: 16px; margin-top: 10px;" id="senderPYT">
+    <button style="width: 100%; background-color: #388c82; color: white; padding: 12px; border: none; border-radius: 8px; font-size: 16px; margin-top: 10px;" id="senderPYT">
       Not Enough Cash
     </button>
 
